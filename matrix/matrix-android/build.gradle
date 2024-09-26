@@ -7,25 +7,31 @@ buildscript {
         mavenCentral()
 
     }
-
-    gradle.ext.KOTLIN_VERSION = "1.4.32"
+    gradle.ext.KOTLIN_VERSION = "1.8.10"
 
     dependencies {
         // classpath
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:8.0.1'
         classpath 'digital.wup:android-maven-publish:3.6.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$gradle.KOTLIN_VERSION"
     }
 
 }
 
+plugins {
+    id "org.jetbrains.kotlin.android" version "$gradle.KOTLIN_VERSION" apply false
+    id "org.jetbrains.kotlin.jvm" version "$gradle.KOTLIN_VERSION" apply false
+}
+
 Properties localProperties = new Properties()
 localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 def SigningFromLocalProperties(properties, project, String prop) {
     if (properties.getProperty(prop)) {
         project.ext[prop] = properties.getProperty(prop)
     }
 }
+
 allprojects {
     repositories {
 

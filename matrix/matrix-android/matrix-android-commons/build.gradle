@@ -1,4 +1,6 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+}
 
 apply from: rootProject.file('gradle/WeChatNativeDepend.gradle')
 
@@ -19,7 +21,7 @@ android {
         externalNativeBuild {
             cmake {
                 targets = ['xhook', 'semi_dlfcn', 'enhance_dlsym']
-                arguments = ["-DEnableLOG=${gradle.enableLog() ? "ON" : "OFF"}" as String]
+                arguments = ["-DEnableLOG=${gradle.enableLog() ? "ON" : "OFF"}"]
             }
             exportHeaders {
                 from('src/main/cpp/libxhook') {

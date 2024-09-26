@@ -1,6 +1,6 @@
 apply plugin: 'com.google.osdetector'
 
-ext.removeUnusedResourcesV2Enable = true
+ext.removeUnusedResourcesV2Enable = false
 
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -80,9 +80,11 @@ android {
     }
 
     if (!removeUnusedResourcesV2Enable) {
+        println "removeUnusedResourcesV2Enable not enable"
         applicationVariants.all { variant ->
             if (variant.name.equalsIgnoreCase("debug")) {
                 packageDebug.doLast {
+                    println "hello i am doing packageDebug last"
                     ProcessBuilder processBuilder = new ProcessBuilder();
                     println configurations.apkCheckerDependency.getAt(0).getAbsolutePath()
                     processBuilder.command("java",
